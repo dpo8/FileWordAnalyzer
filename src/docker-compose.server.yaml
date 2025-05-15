@@ -1,0 +1,16 @@
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ./server/Dockerfile
+    image: my-server:latest
+    ports:
+      - "9259:9259"
+      - "9258:9258"
+    networks:
+      - app-network
+    command: [ "java", "-cp", "out", "server.Server", "9259", "/data/dracula.txt", "9258", "/data/frankenstein.txt" ]
+
+networks:
+  app-network:
+    driver: bridge
